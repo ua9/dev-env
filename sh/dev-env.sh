@@ -21,7 +21,7 @@ running_id=$(docker ps -q --filter="ancestor=$image")
 
 if [ "x$running_id" = 'x' ]
 then
-	running_id=$(docker run -P --hostname=DEV-ENV -d $image)
+	running_id=$(docker run -P --hostname=DEV-ENV -v "/:/host" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
 fi
 
 if [ "x$is_linux" = "x" ]
@@ -32,4 +32,4 @@ else
 	ip=$(di $running_id)
 fi
 
-ssh -oStrictHostKeyChecking=no -t -p $port ubuntu@$ip $command
+ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -t -p $port ubuntu@$ip $command
