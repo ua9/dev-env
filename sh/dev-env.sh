@@ -1,5 +1,10 @@
 #!/bin/sh
 
+command="$1"
+if [ "x$command" = "x" ]
+then
+	command="screen -xR"
+fi
 docker_machine_name='default'
 is_linux="$(uname | grep -i linux)"
 ip=''
@@ -27,4 +32,4 @@ else
 	ip=$(di $running_id)
 fi
 
-ssh -oStrictHostKeyChecking=no -t -p $port ubuntu@$ip screen -xR
+ssh -oStrictHostKeyChecking=no -t -p $port ubuntu@$ip $command
