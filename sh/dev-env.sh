@@ -21,7 +21,7 @@ running_id=$(docker ps -q --filter="ancestor=$image")
 
 if [ "x$running_id" = 'x' ]
 then
-	running_id=$(docker run -P -d $image)
+	running_id=$(docker run -P --hostname=DEV-ENV -d $image)
 fi
 
 if [ "x$is_linux" = "x" ]
