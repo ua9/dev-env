@@ -21,6 +21,7 @@ running_id=$(docker ps -q --filter="ancestor=$image")
 
 if [ "x$running_id" = 'x' ]
 then
+	docker pull $image
 	running_id=$(docker run -P --hostname=DEV-ENV -v "/:/host" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
 fi
 
