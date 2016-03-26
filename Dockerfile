@@ -16,7 +16,6 @@ RUN apt-get update && \
 	pip install powerline-status && \
 	mkdir /var/run/sshd && \
 	useradd --create-home --shell=/bin/bash ${USER} && \
-	git clone https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim && \
 	echo "${USER}:1" | chpasswd && \
 	adduser ${USER} sudo && \
 	adduser ${USER} users && \
