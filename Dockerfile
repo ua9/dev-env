@@ -16,7 +16,7 @@ RUN apt-get update && \
 	adduser ${USER} sudo && \
 	adduser ${USER} users && \
 	usermod -aG docker ${USER} && \
-	chmod a+x /usr/local/bin/docker-compose && \
+	chmod a+rx /usr/local/bin/docker-compose && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 VOLUME "/home/${USER}"
