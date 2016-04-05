@@ -3,6 +3,7 @@ ENV UBUNTU_VERSION trusty
 MAINTAINER Anton Marianov <anovmari@gmail.com>
 ENV USER ubuntu
 ENV COMPOSE_VERSION 1.6.2
+ARG DEBIAN_FRONTEND=noninteractive
 ADD "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-Linux-x86_64" /usr/local/bin/docker-compose
 RUN apt-get update && \
 	locale-gen "en_US.UTF-8" && \
