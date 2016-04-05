@@ -21,6 +21,7 @@ RUN apt-get update && \
 	adduser ${USER} users && \
 	usermod -aG docker ${USER} && \
 	chmod a+rx /usr/local/bin/docker-compose && \
+	ln -s $(pip show powerline-status | grep Location | sed s/Location:\ //) /opt/powerline-repo && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 VOLUME "/home/${USER}"
