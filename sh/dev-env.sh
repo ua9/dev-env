@@ -6,7 +6,7 @@ is_linux="$(uname | grep -i linux)"
 is_windows="$(echo $TERM | grep cygwin)"
 ip=''
 port=22
-image="dev-env"
+image="anovmari/dev-env"
 alias di='docker inspect --format '\''{{ .NetworkSettings.IPAddress }}'\'' '
 
 if [ "x$is_linux" = "x" ]
