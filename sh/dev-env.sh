@@ -8,32 +8,34 @@ ip=''
 port=22
 image="anovmari/dev-env"
 alias di='docker inspect --format '\''{{ .NetworkSettings.IPAddress }}'\'' '
+ports=''
 
 if [ "x$is_linux" = "x" ]
 then
-	eval $(docker-machine env $docker_machine_name)
+  ports='-P'
+  eval $(docker-machine env $docker_machine_name)
 fi
 
 running_id=$(docker ps -q --filter="ancestor=$image")
 
 if [ "x$running_id" = 'x' ]
 then
-	docker pull $image
-	running_id=$(docker run -P --dns=8.8.8.8 --dns=8.8.4.4 --hostname=DEV-ENV --cap-add=NET_ADMIN --device //dev/net/tun -e "TZ=Europe/Kiev" -v "//://host" -v "//etc/localtime://etc/localtime:ro" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
+  docker pull $image
+  running_id=$(docker run $ports --dns=8.8.8.8 --dns=8.8.4.4 --hostname=DEV-ENV --cap-add=NET_ADMIN --device //dev/net/tun -e "TZ=Europe/Kiev" -v "//://host" -v "//etc/localtime://etc/localtime:ro" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
 fi
 
 if [ "x$is_linux" = "x" ]
 then
-	ip=$(docker-machine ip $docker_machine_name)
-	port=$(docker port $running_id 22 | sed s/0.0.0.0://)
+  ip=$(docker-machine ip $docker_machine_name)
+  port=$(docker port $running_id 22 | sed s/0.0.0.0://)
 else
-	ip=$(di $running_id)
+  ip=$(di $running_id)
 fi
 if [ "x$is_windows" != "x" ]
 then
-	echo "IP: $ip"
-	echo "port: $port"
-	read -p "Press [Enter] to exit..."
+  echo "IP: $ip"
+  echo "port: $port"
+  read -p "Press [Enter] to exit..."
 else
-	ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -t -p $port ubuntu@$ip "tmux -2 attach || tmux -2 new"
+  ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -t -p $port ubuntu@$ip "tmux -2 attach || tmux -2 new"
 fi
