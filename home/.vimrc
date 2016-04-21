@@ -20,6 +20,7 @@ Plugin 'junegunn/seoul256.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'evanmiller/nginx-vim-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -80,6 +81,7 @@ set expandtab
 " associate .babelrs with json filetype
 au BufRead,BufNewFile .babelrc setfiletype json
 au BufRead,BufNewFile .bash_aliases setfiletype sh
+au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/*,nginx.conf setfiletype sh
 au BufRead,BufNewFile *.docker set syntax=Dockerfile
 
 " Disable removing quotes in json
