@@ -29,6 +29,7 @@ RUN apt-get update && \
 	apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/*
 USER ubuntu
+ARG OLDPATH="$PATH"
 ENV PATH "/home/${USER}/.linuxbrew/bin:${PATH}"
 RUN ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)" && \
   brew install flow && \
@@ -42,4 +43,5 @@ VOLUME "/home/${USER}"
 EXPOSE 22
 USER root
 RUN apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev
+ENV PATH "$OLDPATH"
 CMD ["/usr/sbin/sshd", "-D"]
