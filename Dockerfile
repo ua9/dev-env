@@ -6,14 +6,11 @@ ARG COMPOSE_VERSION=1.6.2
 ARG DEBIAN_FRONTEND=noninteractive
 ADD "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-Linux-x86_64" /usr/local/bin/docker-compose
 ADD ./home /home/${USER}
-RUN apt-get update && \
-	locale-gen "en_US.UTF-8" && \
+RUN locale-gen "en_US.UTF-8" && \
 	dpkg-reconfigure locales && \
-	apt-get install -y apt-transport-https ca-certificates && \
-	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
-	echo "deb https://apt.dockerproject.org/repo ubuntu-${UBUNTU_VERSION} main" >> /etc/apt/sources.list.d/docker.list && \
-	apt-get update && \
-	apt-get install -y openssh-server python-pip vim screen tmux sudo man less git curl docker-engine openvpn iptables telnet && \
+  wget -qO- https://get.docker.com/ | sh && \
+  wget -qO- https://deb.nodesource.com/setup_5.x | sh && \
+	apt-get install -y openssh-server python-pip vim screen tmux sudo man less git curl openvpn iptables telnet build-essential cmake libelf-dev python-dev python3-dev ruby nodejs && \
 	pip install powerline-status && \
 	mkdir /var/run/sshd && \
 	useradd --shell=/bin/bash ${USER} && \
@@ -27,6 +24,14 @@ RUN apt-get update && \
 	ln -s $(pip show powerline-status | grep Location | sed s/Location:\ //) /opt/powerline-repo && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
+USER ubuntu
+RUN brew install flow && \
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
+  vim +PluginInstall +qall &&
+  cd ~/.vim/bundle/tern_for_vim &&
+  npm install && \
+  cd ~/.vim/bundle/YouCompleteMe && \
+  ./install.py --tern-completer
 VOLUME "/home/${USER}"
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
