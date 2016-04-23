@@ -122,3 +122,17 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /opt/powerline-repo/powerline/bindings/bash/powerline.sh
+
+vim()
+{
+  # osx users, use stty -g
+  local STTYOPTS="$(stty --save)"
+  stty stop '' -ixoff
+  command vim "$@"
+  stty "$STTYOPTS"
+}
+
+
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
