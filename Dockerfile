@@ -41,5 +41,5 @@ RUN ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/
 VOLUME "/home/${USER}"
 EXPOSE 22
 USER root
-RUN apt-get remove -y build-essential cmake libelf-dev python-dev python3-dev
+RUN apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev
 CMD ["/usr/sbin/sshd", "-D"]
