@@ -46,9 +46,9 @@ filetype plugin indent on    " required
 
 " load color scheme
 if has("gui_running")
-  colorscheme stonewashed-gui
+  silent! colorscheme stonewashed-gui
 else
-  colorscheme seoul256
+  silent! colorscheme seoul256
 endif
 
 " turn on syntax highlighting
@@ -72,9 +72,11 @@ set hlsearch
 " autocmd InsertLeave * hi CursorLine ctermbg=231 guibg=#ffffff
 
 " powerline setup
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+if has('python')
+  python from powerline.vim import setup as powerline_setup
+  python powerline_setup()
+  python del powerline_setup
+endif
 " Always show statusline
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
