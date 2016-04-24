@@ -20,7 +20,7 @@ running_id=$(docker ps -q --filter="ancestor=$image")
 
 if [ "x$running_id" = 'x' ]
 then
-  docker pull $image
+  docker pull $image 1>&2
   running_id=$(docker run $ports --dns=8.8.8.8 --dns=8.8.4.4 --hostname=DEV-ENV --cap-add=NET_ADMIN --device //dev/net/tun -e "TZ=Europe/Kiev" -v "//://host" -v "//etc/localtime://etc/localtime:ro" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
 fi
 
