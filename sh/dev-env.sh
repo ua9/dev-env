@@ -37,5 +37,11 @@ then
   echo "port: $port"
   read -p "Press [Enter] to exit..."
 else
-  ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -t -p $port ubuntu@$ip "tmux -2 attach || tmux -2 new"
+  command='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -t -p '$port' ubuntu@'$ip' "tmux -2 attach || tmux -2 new"'
+  if [ -t 0 ]
+  then
+    eval "$command"
+  else
+    echo "$command"
+  fi
 fi
