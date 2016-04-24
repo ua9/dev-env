@@ -28,13 +28,14 @@ RUN apt-get update && \
   ln -s $(pip show powerline-status | grep Location | sed s/Location:\ //) /opt/powerline-repo && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* && \
-  su -c 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"' - ubuntu && \
-  su -c 'export PATH="/home/${USER}/.linuxbrew/bin:${PATH}" && brew install flow' - ubuntu && \
+  npm install --global flow-bin && \
   su -c 'git clone https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim' - ubuntu && \
   su -c 'vim +PluginInstall +qall' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/tern_for_vim && npm install' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/YouCompleteMe && ./install.py --tern-completer' - ubuntu && \
-  apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev
+  su -c 'npm cache clean' - ubuntu && \
+  apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev && \
+  npm cache clean
 VOLUME "/home/${USER}"
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
