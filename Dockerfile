@@ -13,7 +13,7 @@ RUN apt-get update && \
   wget -qO- https://deb.nodesource.com/setup_5.x | sh && \
 	apt-get install -y inetutils-ping openssh-server python-pip vim screen \
     tmux sudo man less git curl openvpn iptables net-tools telnet \
-    build-essential cmake libelf-dev python-dev python3-dev ruby nodejs && \
+    build-essential cmake libelf-dev libelf1 python-dev python3-dev ruby nodejs && \
 	pip install powerline-status && \
 	mkdir /var/run/sshd && \
 	useradd --shell=/bin/bash ${USER} && \
