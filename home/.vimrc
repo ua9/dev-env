@@ -121,6 +121,7 @@ command -nargs=0 -bar Update if &modified
                            \|    endif
                            \|endif
 nnoremap <silent> <C-S> :<C-u>Update<CR>
+inoremap <c-s> <c-o>:Update<CR>
 
 " On F8 disable autoindent and comments
 nnoremap <F8> :setl formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=<CR>
