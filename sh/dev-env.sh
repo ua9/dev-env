@@ -16,12 +16,12 @@ then
   eval $(docker-machine env $docker_machine_name)
 fi
 
-running_id=$(docker ps -q --filter="ancestor=$image")
+running_id=$(docker ps --filter="ancestor=anovmari/dev-env" --format="{{.ID}} {{.Command}} {{.Ports}}" | grep sshd | grep 22\/tcp | head -n 1 | awk '{print $1}')
 
 if [ "x$running_id" = 'x' ]
 then
   docker pull $image 1>&2
-  running_id=$(docker run $ports --dns=8.8.8.8 --dns=8.8.4.4 --hostname=DEV-ENV --cap-add=NET_ADMIN --device //dev/net/tun -e "TZ=Europe/Kiev" -v "//://host" -v "//etc/localtime://etc/localtime:ro" -v //var/run/docker.sock:/var/run/docker.sock -d $image)
+  running_id=$(docker run $ports --dns=8.8.8.8 --dns=8.8.4.4 --hostname=DEV-ENV --cap-add=NET_ADMIN --device //dev/net/tun -e "TZ=Europe/Kiev" -v "//://host" -v "//etc/localtime://etc/localtime:ro" -v //var/run/docker.sock:/var/run/docker.sock --user root --expose 22 -d $image /usr/sbin/sshd -D)
 fi
 
 if [ "x$is_linux" = "x" ]

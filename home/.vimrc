@@ -107,7 +107,6 @@ set hidden
 au VimEnter * IndentGuidesToggle
 
 " Clear search highlight
-"nnoremap <esc> :noh<return><esc>
 nnoremap <silent> <C-L> :noh<CR>
 
 " Save buffer on Ctr-S
@@ -126,3 +125,5 @@ inoremap <c-s> <c-o>:Update<CR>
 " On F8 disable autoindent and comments
 nnoremap <F8> :setl formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=<CR>
 
+" Close flow windows if there is no errors
+let g:flow#autoclose = 1
