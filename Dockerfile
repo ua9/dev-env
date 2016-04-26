@@ -24,8 +24,6 @@ RUN apt-get update && \
   echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && \
   chmod a+rx /usr/local/bin/docker-compose && \
   ln -s $(pip show powerline-status | grep Location | sed s/Location:\ //) /opt/powerline-repo && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* /tmp/* && \
   npm install --global flow-bin && \
   chown -R ${USER}:${USER} /home/${USER} && \
   su -c 'touch /home/${USER}/.sudo_as_admin_successful' - ubuntu && \
@@ -33,10 +31,12 @@ RUN apt-get update && \
   su -c 'vim +PluginInstall +qall' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/tern_for_vim && npm install' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/YouCompleteMe && ./install.py --tern-completer' - ubuntu && \
-  su -c 'npm cache clean' - ubuntu && \
   su -c 'mkdir /home/${USER}/mnt' - ubuntu && \
+  su -c 'npm cache clean' - ubuntu && \
   apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev && \
-  npm cache clean
+  apt-get clean && \
+  npm cache clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/*
 VOLUME "/home/${USER}"
 WORKDIR "/home/${USER}/mnt"
 USER ${USER}
