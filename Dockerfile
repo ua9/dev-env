@@ -16,8 +16,6 @@ RUN apt-get install -y build-essential cmake libelf-dev libelf1 python-dev pytho
 RUN pip install powerline-status
 RUN mkdir /var/run/sshd
 RUN useradd --shell=/bin/bash ${USER}
-RUN touch /home/${USER}/.sudo_as_admin_successful
-RUN chown -R ${USER}:${USER} /home/${USER}
 RUN echo "${USER}:1" | chpasswd
 RUN adduser ${USER} sudo
 RUN adduser ${USER} users
@@ -29,6 +27,8 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/*
 RUN npm install --global flow-bin
 ADD ./home /home/${USER}
+RUN chown -R ${USER}:${USER} /home/${USER}
+RUN su -c 'touch /home/${USER}/.sudo_as_admin_successful' - ubuntu
 RUN su -c 'git clone https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim' - ubuntu
 RUN su -c 'vim +PluginInstall +qall' - ubuntu
 RUN su -c 'cd /home/${USER}/.vim/bundle/tern_for_vim && npm install' - ubuntu
