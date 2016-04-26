@@ -29,7 +29,7 @@ RUN apt-get update && \
   npm install --global flow-bin && \
   chown -R ${USER}:${USER} /home/${USER} && \
   su -c 'touch /home/${USER}/.sudo_as_admin_successful' - ubuntu && \
-  su -c 'git clone https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim' - ubuntu && \
+  su -c 'git clone --depth=1 --single-branch -b master https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim' - ubuntu && \
   su -c 'vim +PluginInstall +qall' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/tern_for_vim && npm install' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/YouCompleteMe && ./install.py --tern-completer' - ubuntu && \
