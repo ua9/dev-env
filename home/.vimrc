@@ -20,7 +20,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'othree/yajs.vim', { 'for': 'javascript' }
 Plugin 'facebook/vim-flow', { 'for': 'javascript' }
 Plugin 'othree/es.next.syntax.vim'
-Plugin 'jlanzarotta/bufexplorer'
+Plugin 'fholgado/minibufexpl.vim'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
@@ -29,6 +29,7 @@ Plugin 'bigfish/vim-js-context-coloring'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'kien/ctrlp.vim'
 Plugin 'janko-m/vim-test'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -144,3 +145,31 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" show the 80 line limit
+set colorcolumn=80
+
+set showbreak=
+set incsearch
+
+" ignore case on search
+set ignorecase
+
+" Mini Buf Explorer
+let g:miniBufExplStatusLineText=''
+let g:miniBufExplVSplit=40
+let g:miniBufExplBRSplit = 1
+nnoremap <F10> :MBEToggleAll<CR>
+
+" NerdTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+function! ToggleNERDTreeFind()
+  if g:NERDTree.IsOpen()
+    execute ':NERDTreeClose'
+  else
+    execute ':NERDTreeFind'
+  endif
+endfunction
+map <F3> :call ToggleNERDTreeFind()<CR>
+let NERDTreeQuitOnOpen=1
