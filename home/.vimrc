@@ -28,6 +28,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'bigfish/vim-js-context-coloring'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'kien/ctrlp.vim'
+Plugin 'janko-m/vim-test'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,10 +62,6 @@ set colorcolumn=120
 
 " highlight search result
 set hlsearch
-
-" make cursorlines brighter in insert mode
-" autocmd InsertEnter * hi CursorLine ctermbg=230 guibg=#ffffdf
-" autocmd InsertLeave * hi CursorLine ctermbg=231 guibg=#ffffff
 
 " powerline setup
 if has('python')
@@ -125,6 +122,7 @@ let g:flow#autoclose = 1
 
 " Toggle JS Coloring
 nnoremap <F9> :JSContextColorToggle<CR>
+let g:js_context_colors_usemaps=0
 
 " Line Numbers on F2
 let g:NumberToggleTrigger="<F2>"
@@ -135,3 +133,14 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
+
+" Allow per project settings
+set exrc
+set secure
+
+" Configure Tests
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
