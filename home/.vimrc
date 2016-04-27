@@ -30,6 +30,12 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'kien/ctrlp.vim'
 Plugin 'janko-m/vim-test'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'bling/vim-bufferline'
+Plugin 'mbbill/undotree'
+Plugin 'edkolev/promptline.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,12 +70,6 @@ set colorcolumn=120
 " highlight search result
 set hlsearch
 
-" powerline setup
-if has('python')
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
-endif
 " Always show statusline
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
@@ -173,3 +173,20 @@ function! ToggleNERDTreeFind()
 endfunction
 map <F3> :call ToggleNERDTreeFind()<CR>
 let NERDTreeQuitOnOpen=1
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
+
+
+" Undotree
+nnoremap <F5> :UndotreeToggle<cr>
+if has("persistent_undo")
+  set undodir=~/.undodir/
+  set undofile
+endif
+
+" Tmuxline
+let g:airline#extensions#tmuxline#enabled = 0
+
+"

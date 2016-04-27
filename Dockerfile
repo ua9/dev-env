@@ -11,10 +11,9 @@ RUN apt-get update && \
   dpkg-reconfigure locales && \
   wget -qO- https://get.docker.com/ | sh && \
   wget -qO- https://deb.nodesource.com/setup_5.x | sh && \
-  apt-get install -y inetutils-ping openssh-server python-pip vim-nox screen && \
+  apt-get install -y inetutils-ping openssh-server vim-nox screen && \
   apt-get install -y tmux sudo man less git curl openvpn iptables net-tools telnet && \
-  apt-get install -y build-essential cmake libelf-dev libelf1 python-dev python3-dev ruby nodejs && \
-  pip install powerline-status && \
+  apt-get install -y build-essential cmake libelf-dev libelf1 python-dev python3-dev nodejs && \
   mkdir /var/run/sshd && \
   useradd --shell=/bin/bash ${USER} && \
   echo "${USER}:1" | chpasswd && \
@@ -23,7 +22,6 @@ RUN apt-get update && \
   adduser ${USER} docker && \
   echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && \
   chmod a+rx /usr/local/bin/docker-compose && \
-  ln -s $(pip show powerline-status | grep Location | sed s/Location:\ //) /opt/powerline-repo && \
   npm install --global flow-bin && \
   chown -R ${USER}:${USER} /home/${USER} && \
   su -c 'touch /home/${USER}/.sudo_as_admin_successful' - ubuntu && \

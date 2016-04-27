@@ -117,11 +117,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Setup powerline
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /opt/powerline-repo/powerline/bindings/bash/powerline.sh
+# promptline
+source ~/.bashline
 
 vim()
 {
