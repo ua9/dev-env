@@ -11,7 +11,7 @@ RUN apt-get update && \
   dpkg-reconfigure locales && \
   wget -qO- https://get.docker.com/ | sh && \
   wget -qO- https://deb.nodesource.com/setup_5.x | sh && \
-  apt-get install -y inetutils-ping openssh-server python-pip vim screen && \
+  apt-get install -y inetutils-ping openssh-server python-pip vim-nox screen && \
   apt-get install -y tmux sudo man less git curl openvpn iptables net-tools telnet && \
   apt-get install -y build-essential cmake libelf-dev libelf1 python-dev python3-dev ruby nodejs && \
   pip install powerline-status && \
@@ -30,9 +30,11 @@ RUN apt-get update && \
   su -c 'git clone --depth=1 --single-branch -b master https://github.com/VundleVim/Vundle.vim.git /home/${USER}/.vim/bundle/Vundle.vim' - ubuntu && \
   su -c 'vim +PluginInstall +qall' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/tern_for_vim && npm install' - ubuntu && \
+  su -c 'cd /home/${USER}/.vim/bundle/vim-js-context-coloring && npm install' - ubuntu && \
   su -c 'cd /home/${USER}/.vim/bundle/YouCompleteMe && ./install.py --tern-completer' - ubuntu && \
   su -c 'mkdir /home/${USER}/mnt' - ubuntu && \
   su -c 'npm cache clean' - ubuntu && \
+  su -c 'find /home/${USER}/.vim -name .git -type d -prune -exec rm -rf {} +' - ubuntu && \
   apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev python3-dev && \
   apt-get clean && \
   npm cache clean && \

@@ -17,17 +17,17 @@ Plugin 'elzr/vim-json'
 Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/yajs.vim', { 'for': 'javascript' }
 Plugin 'facebook/vim-flow', { 'for': 'javascript' }
 Plugin 'othree/es.next.syntax.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plugin 'ternjs/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'nathanaelkane/vim-indent-guides'
-" shows nothing:
-" Plugin 'bigfish/vim-js-context-coloring'
+Plugin 'bigfish/vim-js-context-coloring'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,11 +53,6 @@ endif
 
 " turn on syntax highlighting
 syntax on
-
-" show line numbers
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-set relativenumber
 
 " cursor lines
 set cursorline
@@ -127,3 +122,16 @@ nnoremap <F8> :setl formatoptions-=c formatoptions-=r formatoptions-=o noai noci
 
 " Close flow windows if there is no errors
 let g:flow#autoclose = 1
+
+" Toggle JS Coloring
+nnoremap <F9> :JSContextColorToggle<CR>
+
+" Line Numbers on F2
+let g:NumberToggleTrigger="<F2>"
+set relativenumber
+
+" CtrlP config
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \ }
