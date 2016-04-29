@@ -158,10 +158,23 @@ set incsearch
 set ignorecase
 
 " Mini Buf Explorer
-let g:miniBufExplStatusLineText=''
 let g:miniBufExplVSplit=40
 let g:miniBufExplBRSplit = 1
-nnoremap <F10> :MBEToggleAll<CR> :MBEFocus<CR>
+function! MyMBEToggleAll()
+  let bnr = bufwinnr("MiniBufExplorer")
+  let curbuf = bufname("%")
+  if bnr > 0
+    if curbuf == "-MiniBufExplorer-"
+      :MBECloseAll
+    else
+      :MBEFocusAll
+    endif
+  else
+    :MBEToggleAll
+    :MBEFocusAll
+  endif
+endfunction
+nnoremap <F10> :call MyMBEToggleAll()<CR>
 noremap <C-TAB>   :MBEbn<CR>
 noremap <C-S-TAB> :MBEbp<CR>
 
