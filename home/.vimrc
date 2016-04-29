@@ -161,7 +161,9 @@ set ignorecase
 let g:miniBufExplStatusLineText=''
 let g:miniBufExplVSplit=40
 let g:miniBufExplBRSplit = 1
-nnoremap <F10> :MBEToggleAll<CR>
+nnoremap <F10> :MBEToggleAll<CR> :MBEFocus<CR>
+noremap <C-TAB>   :MBEbn<CR>
+noremap <C-S-TAB> :MBEbp<CR>
 
 " NerdTree
 autocmd StdinReadPre * let s:std_in=1
@@ -191,4 +193,3 @@ endif
 " Tmuxline
 let g:airline#extensions#tmuxline#enabled = 0
 
-"
