@@ -36,6 +36,7 @@ Plugin 'bling/vim-bufferline'
 Plugin 'mbbill/undotree'
 Plugin 'edkolev/promptline.vim'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'christoomey/vim-tmux-runner'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -145,6 +146,7 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = "vtr"
 
 " show the 80 line limit
 set colorcolumn=80
