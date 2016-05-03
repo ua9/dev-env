@@ -206,3 +206,6 @@ endif
 " Tmuxline
 let g:airline#extensions#tmuxline#enabled = 0
 
+" Show whitespace characters
+nnoremap <F6> :set list!<CR>
+set listchars=eol:$,tab:>-,space:●,trail:~,extends:>,precedes:<
