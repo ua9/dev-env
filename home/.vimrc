@@ -126,8 +126,8 @@ let g:flow#autoclose = 1
 nnoremap <F9> :JSContextColorToggle<CR>
 let g:js_context_colors_usemaps=0
 
-" Line Numbers on F2
-let g:NumberToggleTrigger="<F2>"
+" Line Numbers on F12
+let g:NumberToggleTrigger="<F12>"
 set relativenumber
 
 " CtrlP config
@@ -161,35 +161,42 @@ set ignorecase
 let g:miniBufExplVSplit=40
 let g:miniBufExplBRSplit = 1
 function! MyMBEToggleAll()
-  let bnr = bufwinnr("MiniBufExplorer")
-  let curbuf = bufname("%")
+  let bnr = bufwinnr("-MiniBufExplorer-")
   if bnr > 0
-    if curbuf == "-MiniBufExplorer-"
-      :MBECloseAll
-    else
-      :MBEFocusAll
-    endif
+    :MBECloseAll
   else
+    call CloseRight()
     :MBEToggleAll
     :MBEFocusAll
   endif
 endfunction
-nnoremap <F10> :call MyMBEToggleAll()<CR>
-noremap <C-TAB>   :MBEbn<CR>
-noremap <C-S-TAB> :MBEbp<CR>
+nnoremap <F4> :call MyMBEToggleAll()<CR>
 
 " NerdTree
+let g:NERDTreeWinPos = "right"
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 function! ToggleNERDTreeFind()
   if g:NERDTree.IsOpen()
     execute ':NERDTreeClose'
   else
+    call CloseRight()
     execute ':NERDTreeFind'
   endif
 endfunction
 map <F3> :call ToggleNERDTreeFind()<CR>
 let NERDTreeQuitOnOpen=1
+
+" Close everything on right
+nnoremap <silent> <F2> :call CloseRight()<CR>
+function! CloseRightNoVTR()
+  :NERDTreeClose
+  :MBECloseAll
+endfunction
+function! CloseRight()
+  :VtrKillRunner
+  call CloseRightNoVTR()
+endfunction
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -197,7 +204,7 @@ let g:airline_theme='powerlineish'
 
 
 " Undotree
-nnoremap <F5> :UndotreeToggle<cr>
+nnoremap <F6> :UndotreeToggle<cr>
 if has("persistent_undo")
   set undodir=~/.undodir/
   set undofile
@@ -207,5 +214,10 @@ endif
 let g:airline#extensions#tmuxline#enabled = 0
 
 " Show whitespace characters
-nnoremap <F6> :set list!<CR>
+nnoremap <F7> :set list!<CR>
 set listchars=eol:$,tab:>-,space:●,trail:~,extends:>,precedes:<
+
+" VTR
+let g:VtrOrientation="h"
+let g:VtrInitialCommand="export PS1='' && export PROMPT_COMMAND='' && clear"
+autocmd VimLeave * VtrKillRunner
