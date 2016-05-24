@@ -36,7 +36,7 @@ Plugin 'bling/vim-bufferline'
 Plugin 'mbbill/undotree'
 Plugin 'edkolev/promptline.vim'
 Plugin 'edkolev/tmuxline.vim'
-Plugin 'christoomey/vim-tmux-runner'
+Plugin 'anovmari/vim-tmux-runner'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -158,7 +158,7 @@ set incsearch
 set ignorecase
 
 " Mini Buf Explorer
-let g:miniBufExplVSplit=40
+let g:miniBufExplVSplit=30
 let g:miniBufExplBRSplit = 1
 function! MyMBEToggleAll()
   let bnr = bufwinnr("-MiniBufExplorer-")
@@ -174,8 +174,10 @@ nnoremap <F4> :call MyMBEToggleAll()<CR>
 
 " NerdTree
 let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinSize = 30
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Add hack for NerdTree to honor g:NERDTreeWinSize
+autocmd VimEnter * NERDTree | NERDTreeClose | if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 function! ToggleNERDTreeFind()
   if g:NERDTree.IsOpen()
     execute ':NERDTreeClose'
@@ -220,4 +222,6 @@ set listchars=eol:$,tab:>-,space:●,trail:~,extends:>,precedes:<
 " VTR
 let g:VtrOrientation="h"
 let g:VtrInitialCommand="export PS1='' && export PROMPT_COMMAND='' && clear"
+let g:VtrLines=30
+nnoremap <F5> :VtrFocusRunner<CR>
 autocmd VimLeave * VtrKillRunner
