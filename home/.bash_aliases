@@ -1,6 +1,6 @@
 #alias npm='docker run -it -e "HOME=/tmp" -u $(id -u) -e NODE_ENV=${NODE_ENV} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v "$(pwd)":/usr/src/app -w /usr/src/app node:5 npm'
 #alias node='docker run -it -e "HOME=/tmp" -u $(id -u) -e NODE_ENV=${NODE_ENV} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v "$(pwd)":/usr/src/app -w /usr/src/app node:5 node'
-#alias npm_dev='docker run -it -e "HOME=/tmp" -u $(id -u) -e NODE_ENV=${NODE_ENV} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -p 3000:3000 -v "$(pwd)":/usr/src/app -w /usr/src/app node:5 npm'
+alias npm_dev='docker run -it -e "HOME=/tmp" -u $(id -u) -e NODE_ENV=${NODE_ENV} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -p 3000:3000 -v "$(pwd)":/usr/src/app -w /usr/src/app node:5 npm'
 alias docker_clean='docker rm $(docker ps -a -q --filter status=exited); docker volume rm $(docker volume ls -qf dangling=true)'
 alias dterm='docker run --privileged -v /var/run/docker.sock:/run/docker.sock -ti --rm -e TERM=$TERM tomastomecek/sen'
 alias vundle_clone='git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
