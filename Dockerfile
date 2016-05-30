@@ -21,6 +21,7 @@ RUN apt-get -y update && \
   adduser ${USER} sudo && \
   adduser ${USER} users && \
   adduser ${USER} docker && \
+  adduser ${USER} staff && \
   echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && \
   chmod a+rx /usr/local/bin/docker-compose && \
   npm install --global flow-bin && \
