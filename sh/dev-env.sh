@@ -13,7 +13,7 @@ then
   ports='-P'
 fi
 
-running_id=$(docker ps --filter="ancestor=anovmari/dev-env" --format="{{.ID}} {{.Command}} {{.Ports}}" | grep sshd | grep 22\/tcp | head -n 1 | awk '{print $1}')
+running_id=$(docker ps --filter="ancestor=$image" --format="{{.ID}} {{.Command}} {{.Ports}}" | grep sshd | grep 22\/tcp | head -n 1 | awk '{print $1}')
 
 if [ "x$running_id" = 'x' ]
 then
