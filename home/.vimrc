@@ -128,8 +128,12 @@ let g:js_context_colors_usemaps=0
 
 " Line Numbers on F12
 let g:NumberToggleTrigger="<F12>"
-
-au VimEnter * set number
+function! DisableRelativeNumbersMy()
+  let g:relativemode = 0
+  set number
+  set norelativenumber
+endfunc
+au VimEnter * call DisableRelativeNumbersMy()
 
 " CtrlP config
 let g:ctrlp_custom_ignore = {
