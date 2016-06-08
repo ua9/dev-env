@@ -230,3 +230,6 @@ let g:VtrInitialCommand="export PS1='' && export PROMPT_COMMAND='' && clear"
 let g:VtrLines=30
 nnoremap <F5> :VtrFocusRunner<CR>
 autocmd VimLeave * VtrKillRunner
+
+" Tern JS
+nnoremap <Leader>r :TernRename <CR>
