@@ -26,7 +26,7 @@ then
   ip=$(docker inspect --format='{{(index (index .NetworkSettings.Ports "22/tcp") 0).HostIp}}' $running_id)
   port=$(docker inspect --format='{{(index (index .NetworkSettings.Ports "22/tcp") 0).HostPort}}' $running_id)
 else
-  ip=$(di $running_id)
+  ip=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' $running_id)
 fi
 if [ "x$is_windows" != "x" ]
 then
