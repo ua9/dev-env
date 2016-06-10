@@ -33,6 +33,7 @@ RUN apt-get -y update && \
     cd .vim/bundle/tern_for_vim && npm install && cd -; \
     cd .vim/bundle/vim-js-context-coloring && npm install && cd -; \
     cd .vim/bundle/YouCompleteMe && ./install.py --tern-completer && cd -; \
+    curl -sL https://download.getcarina.com/dvm/latest/install.sh | sh \
     npm cache clean; \
     find .vim -name .git -type d -prune -exec rm -rf {} +' && \
   apt-get remove -y --auto-remove build-essential cmake libelf-dev python-dev && \
