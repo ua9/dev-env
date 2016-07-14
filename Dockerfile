@@ -1,11 +1,9 @@
 FROM ubuntu:xenial
 MAINTAINER Anton Marianov <anovmari@gmail.com>
 ARG USER=ubuntu
-ARG COMPOSE_VERSION=1.7.1
 ARG DEBIAN_FRONTEND=noninteractive
 ADD ./home /home/${USER}
-ADD "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-Linux-x86_64" /usr/local/bin/docker-compose
-RUN apt-get -y update && \
+RUN  apt-get -y update && \
   apt-get -y upgrade && \
   apt-get -y install wget apt-utils && \
   locale-gen "en_US.UTF-8" && \
@@ -15,6 +13,11 @@ RUN apt-get -y update && \
   apt-get -y install inetutils-ping openssh-server vim-nox screen python git-core \
     tmux sudo man less git curl openvpn iptables net-tools telnet bash-completion \
     build-essential cmake libelf-dev libelf1 python-dev nodejs dnsutils libpython2.7 && \
+  curl -sSL https://github.com/docker/compose/releases/download/$(git ls-remote -t -q \
+    https://github.com/docker/compose.git | awk '{print $2}' | \
+    sed 's/refs\/tags\///' | grep -v 'rc' | sort -hr | \
+    head -1)/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose && \
+  chmod a+x /usr/local/bin/docker-compose && \
   mkdir /var/run/sshd && \
   useradd --shell=/bin/bash ${USER} && \
   echo "${USER}:1" | chpasswd && \
