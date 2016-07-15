@@ -1,6 +1,5 @@
 #!/bin/sh
 
-scriptdir=$(cd `dirname $0` && pwd && cd $OLDPWD)/
 is_linux="$(uname | grep -i linux)"
 is_windows="$(echo $TERM | grep cygwin)"
 ip=''
