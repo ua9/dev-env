@@ -1,4 +1,4 @@
-alias dev='eval $(curl -sSL https://raw.githubusercontent.com/anovmari/dev-env/master/sh/dev-env.sh | sh)'
+alias dev='eval "$(curl -sSL http://bit.ly/dev-env | sh)"'
 function forward_docker_port(){
   running_id=$(docker ps --filter="ancestor=anovmari/dev-env" --format="{{.ID}} {{.Command}} {{.Ports}}" | grep sshd | grep 22\/tcp | head -n 1 | awk '{print $1}')
   host_ip=$(docker inspect --format='{{(index (index .NetworkSettings.Ports "22/tcp") 0).HostIp}}' $running_id)
