@@ -12,7 +12,7 @@ RUN  apt-get -y update && \
   wget -qO- https://deb.nodesource.com/setup_6.x | sh && \
   apt-get -y install inetutils-ping openssh-server vim-nox screen python git-core \
     tmux sudo man less git curl openvpn iptables net-tools telnet bash-completion \
-    build-essential cmake libelf-dev libelf1 python-dev nodejs dnsutils libpython2.7
+    build-essential cmake libelf-dev libelf1 python-dev nodejs dnsutils libpython2.7 \
     ftp traceroute && \
   curl -sSL https://github.com/docker/compose/releases/download/$(git ls-remote -t -q \
     https://github.com/docker/compose.git | awk '{print $2}' | \
