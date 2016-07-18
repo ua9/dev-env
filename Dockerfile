@@ -15,7 +15,7 @@ RUN apt-get -y update && \
   apt-get -y install inetutils-ping openssh-server vim-nox screen python git-core \
     tmux sudo man less git curl openvpn iptables net-tools telnet bash-completion \
     build-essential cmake libelf-dev libelf1 python-dev nodejs dnsutils libpython2.7 \
-    ftp libgss3 traceroute && \
+    ftp traceroute && \
   mkdir /var/run/sshd && \
   useradd --shell=/bin/bash ${USER} && \
   echo "${USER}:1" | chpasswd && \
